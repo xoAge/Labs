@@ -44,15 +44,4 @@ with open("text.txt") as file:
         for i in range(len(s_min)):
             j = s_min[i]
             print(j + ' - ',z[s_min[i]])
-                
-    
-    
-            
-            
-        
-       
-    
-        
-   
-   
-            
+              
