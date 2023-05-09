@@ -37,7 +37,6 @@ try:
     print("Матрица А изначальная:")
     matrA = [[random.randint(-10, 10) for i in range(n)] for j in range(n)]   # создаем матрицу размером nxn, заполненную случайными числами
     #matrA = [[i+j*n for i in range(n)] for j in range(n)]                      # задание матрицы для тестирования
-    #matrA = [[(0) for i in range(n)] for j in range(n)]                     # задание матрицы для тестирования нулями
     print_matr(matrA)
     print('E   B       1')
     print('D   C    4     2')
@@ -46,10 +45,10 @@ try:
     fix = delit_n
     if n % 2 != 0:
         fix += 1
-    matrA_p = [[elem for elem in raw] for raw in matrA]               # резервная копия матрицы A для дальнейших операций
-    matrA_tr = [[0 for i in range(n)] for j in range(n)]              # заготовка под транспонированную матрицу A
+    matrA_p = [[elem for elem in raw] for raw in matrA]               # резервная копия матрицы A 
+    matrA_tr = [[0 for i in range(n)] for j in range(n)]              # транспонированная матрица A
     print("Матрица A транспонированная:")
-    for i in range(n):                                                # произведение транспонирования матрицы A
+    for i in range(n):                                                
         for j in range(n):
             matrA_tr[i][j] = matrA_p[j][i]
     print_matr(matrA_tr)                                              # вывод транспонированной матрицы A
@@ -79,9 +78,9 @@ try:
     print_matr(E)
     print("\nПодматрица B матрицы F:")                                # Выводим подматрицу B
     print_matr(B)
-    obl2_quant = 0      # количество нулей по области 2 подматрицы C матрицы F
+    obl2_quant = 0                  # количество нулей по области 2 подматрицы C матрицы F
     obl2 = []
-    obl4_quant = 0  # количество нулей по области 2 подматрицы C матрицы F
+    obl4_quant = 0                  # количество нулей по области 2 подматрицы C матрицы F
     obl4 = []
     for i in range(delit_n):
         for j in range(delit_n):
@@ -111,15 +110,15 @@ try:
     paste_matr(matrF, C, fix, fix)
     paste_matr(matrF, E, 0, 0)
     paste_matr(matrF, D, 0, fix)
-    print_matr(matrF)                       # выводим уже сформированную матрицу F из подматриц
+    print_matr(matrF)                           # выводим уже сформированную матрицу F из подматриц
     matrF_p = [[elem for elem in row] for row in matrF]
-    matrF_tr = [[0 for i in range(n)] for j in range(n)]  # заготовка под транспонированную матрицу F
+    matrF_tr = [[0 for i in range(n)] for j in range(n)]  # транспонированная матрица F
     print("Матрица F транспонированная:")
-    for i in range(n):                          # произведение транспонирования матрицы F
+    for i in range(n):                          
         for j in range(n):
             matrF_tr[i][j] = matrF_p[j][i]
     print_matr(matrF_tr)
-    print("Результат умножения (K * Atr) на (F + A):")
+    print("Результат умножения (K * Atr) на (F + A):")          # Дейсвия с матрицами
     pervoe = [[0 for i in range(n)] for j in range(n)]
     for i in range(n):
         for j in range(n):
@@ -145,13 +144,13 @@ try:
             chetvertoe[i][j] = k * matrF_tr[i][j]
     print("K * Ftr =")
     print_matr(chetvertoe)
-    print("Конечный результат (K * Atr)* (F + A) - K * Ftr =:")
+    print("Конечный результат (K * Atr) * (F + A) - K * Ftr =:")
     pyatoe = [[0 for i in range(n)] for j in range(n)]
     for i in range(n):
         for j in range(n):
             pyatoe[i][j] = tretie[i][j] - chetvertoe[i][j]
     print_matr(pyatoe)
     print("Работа программы завершена.")
-except ValueError:  # ошибка на случай введения не числа в качестве порядка или коэффициента
+except ValueError:  # ошибка на случай ввода не числа 
     print("\nВведенный символ не является числом. "
           "Перезапустите программу и введите число.")
