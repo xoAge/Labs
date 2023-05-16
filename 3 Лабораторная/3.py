@@ -15,7 +15,7 @@ import random
 def print_matr(matr):                                           # вывод матрицы
     matr1 = list(map(list, zip(*matr)))
     for i in range(len(matr1)):
-        k = len(max(list(map(str, matr1[i])), key=len))
+        k = len(max(map(str, matr1[i]), key=len))
         matr1[i] = [f'{elem:{k}d}' for elem in matr1[i]]
     matr1 = list(map(list, zip(*matr1)))
     for ryad in matr1:
