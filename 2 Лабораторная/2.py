@@ -17,7 +17,7 @@ with open("text.txt") as file:
     while True:
         a = file.readline().split()
         for j in a:
-            res = re.findall(r'[0-C]C[0-C]|C[0-C]',j)
+            res = re.findall(r'[0-F]C[0-F]|C[0-F]',j)
             if len(res) == 1:
                 if len(j) < 4:
                     d = int(j, base = 16)
