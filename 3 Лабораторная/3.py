@@ -36,7 +36,6 @@ try:
         n = int(input("Число не подходит по условию, введите число N, большее или равное 8:\n"))
     print("Матрица А изначальная:")
     matrA = [[random.randint(-10, 10) for i in range(n)] for j in range(n)]   # создаем матрицу размером nxn, заполненную случайными числами
-    #matrA = [[i+j*n for i in range(n)] for j in range(n)]                      # задание матрицы для тестирования
     print_matr(matrA)
     print('E   B       1')
     print('D   C    4     2')
