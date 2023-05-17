@@ -24,11 +24,11 @@ with open("text.txt") as file:
         while buf >= '0' and buf <= 'F':
             w_buf += buf
             buf = file.read(buf_r)         #условия для обработки блока
-        if len(w_buf) > 0:
+        if len(w_buf) > 1:
             fb = True
             if w_buf[-2] != 'C':
                 fb = False
-        if fb and len(w_buf) > 0:
+        if fb and len(w_buf) > 1:
             if w_buf[-2] == 'C' and len(w_buf) < 4:
                 d = int(w_buf, 16)
                 if d % 2 == 1:
