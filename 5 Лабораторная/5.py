@@ -8,12 +8,11 @@
 import math
 import matplotlib.pyplot as plt
 import timeit
-def iter(n): #итеративный подход
-    F = [0 for m in range(n + 2)]
-    F[1] = F[2] = 1
-    for i in range(3, n + 1):
-        F[i] = F[i - 1] - math.factorial(i + 2)
-    return F[n]
+def iter(n):              # итеративный подход
+    iter = 1
+    for i in range(3, n+1):
+        iter -= math.factorial(i + 2)
+    return iter
 def rek(n): #рекурсивный подход
     if n == 1 or n == 2:
         return 1
