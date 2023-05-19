@@ -34,9 +34,9 @@ with open("text.txt") as file:
                 if d % 2 == 1:
                     k += 1
                     print(w_buf)
-                if d < d_min and d % 2 == 1:
-                    d_min = d
-                    s_min = w_buf
+                    if d < d_min:
+                        d_min = d
+                        s_min = w_buf
         w_buf = ''
         buf = file.read(buf_r)
     print(k)
