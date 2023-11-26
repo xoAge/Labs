@@ -12,7 +12,6 @@ try:
         def find_best_trio(self, min_reiting, max_budget): # Перебираем методом все возможные комбинации похождения по трем залам
             best_trio = None
             max_sum_reiting = 0
-            min_stoimost = float('inf')
             for i in range(len(self.zali)):
                 for j in range(i + 1, len(self.zali)):
                     for k in range(j + 1, len(self.zali)):              # Проверяем, что все выбранные залы удовлетворяют условиям
