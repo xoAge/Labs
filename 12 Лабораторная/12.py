@@ -14,6 +14,7 @@ def count_summ(matrix, t):
         summa = matrix_det / Decimal(fact_n)
         result_num += -abs(summa) if i == 1 else summa * (-1) ** i
         i += 1
+    print(f"Количество итераций: {i - 1}")
     return result_num
 try:        # Ввод точности t
     t = abs(int(input("Введите точность, число t (количество знаков после запятой): ")))
@@ -21,10 +22,10 @@ try:        # Ввод точности t
     matrix = np.random.uniform(-1,1, size = (rank, rank))
     getcontext().prec = t + 100
     np.set_printoptions(linewidth=200)
-    print(f"Сгенерированная матрица:\n {matrix} ")
+    Rang = np.linalg.matrix_rank(matrix)  # Вычисление ранга матрицы x.
+    print(f"Сгенерированная матрица:\n {matrix} \nРанг матрицы: {Rang}")
     summa_tot = count_summ(matrix, t)
-    rounded_summa = round(summa_tot, t)
-    print(f"Сумма ряда с округлением: {rounded_summa}")
     print(f'Заданная точность: {t}')
+    print(f"Сумма ряда: {summa_tot}")
 except ValueError:
     print("\nВведенный символ не является числом. Перезапустите программу и введите число.")
