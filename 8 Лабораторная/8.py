@@ -51,8 +51,7 @@ class muzei:
 
             for i in range(len(self.zali)):
                 for j in range(i + 1, len(self.zali)):
-                    for k in range(j + 1,
-                                    len(self.zali)):  # Проверяем, что все выбранные залы удовлетворяют условиям
+                    for k in range(j + 1,len(self.zali)):  # Проверяем, что все выбранные залы удовлетворяют условиям
                         trio = [self.zali[i], self.zali[j], self.zali[k]]
                         if all(zal.reiting >= min_reiting and zal.stoimost <= max_budget for zal in trio):
                             sum_reiting = sum(zal.reiting for zal in trio)
