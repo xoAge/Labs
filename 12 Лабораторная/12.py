@@ -9,9 +9,9 @@ def count_summ(matrix, t):
     i, fact_n, summa, result_num = 1, 1, 1, 0
     while abs(summa) > t:           # Цикл для вычисления суммы ряда
         fact_n *= i
-        result_matrix = result_matrix * matrix
+        result_matrix = np.dot(np.dot(result_matrix, matrix), matrix)
         matrix_det = Decimal(np.linalg.det(result_matrix))
-        summa = matrix_det / Decimal(fact_n)
+        summa = (matrix_det*Decimal(fact_n)) / Decimal(fact_n)
         result_num += -abs(summa) if i == 1 else summa * (-1) ** i
         i += 1
     print(f"Количество итераций: {i - 1}")
