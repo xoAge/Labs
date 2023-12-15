@@ -1,22 +1,19 @@
-import csv #Инициализация словарей для хранения данных
-counter_data = {'Q': {'male': {'count': 0,'fare': 0}, 'female': {'count': 0,'fare': 0}},
-                'S': {'male': {'count': 0,'fare': 0}, 'female': {'count': 0,'fare': 0}},
-                'C': {'male': {'count': 0,'fare': 0}, 'female': {'count': 0,'fare': 0}},
-                '': {'male': {'count': 0,'fare': 0}, 'female': {'count': 0,'fare': 0}}}
+#Определить суммарную стоимость билетов мужчин , севших в порту Квинстаун, в возрастном интервале мода +- 15 позиций
+import csv
+from statistics import mode
 with open('titanic.csv', 'r') as file:
     reader = csv.DictReader(file)
-    for row in reader:
-        embarked = row['Embarked']
-        sex = row['Sex']
-        fare = float(row['Fare'])
-        age = row['Age']
-        counter_data[embarked][sex]['count'] += 1
-        counter_data[embarked][sex]['fare'] += fare
-for embarked, gender_data in counter_data.items():
-    for sex, data in gender_data.items():
-        if embarked == 'Q':
-            if sex == 'male':
-                print(f"Порт {embarked}: {sex}  {data['count']}  {data['fare']}")
-
-
-
+    fare_obsh = [] # Создаем списки
+    ages = []
+    for row in reader: # Читаем данные из файла и заполняем списки
+        if row["Embarked"] == "Q" and row["Age"] != "" and row['Sex'] == "male" and row["Fare"] != "":
+            age = float(row['Age'])
+            ages.append(age)
+            fare = float(row['Fare'])
+            fare_obsh.append(fare)
+    age_mode = mode(ages) #мода и возврастной интервал
+    lower_limit = age_mode - 15
+    upper_limit = age_mode + 15
+    filter_fare_obsh = [stoimost for stoimost, age in zip(fare_obsh, ages) if lower_limit <= age <= upper_limit] # Фильтруем билеты в нужном возрастном интервале
+    fare_konechnii = sum(filter_fare_obsh)
+    print(f"Мода = {age_mode}\nСуммарная стоимость билетов:",round(fare_konechnii, 5))
