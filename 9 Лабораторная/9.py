@@ -1,58 +1,57 @@
-#Задание. Окно регистрации пользователя
+#Задание Окно регистрации пользователя.
+import os
 from tkinter import *
 from tkinter import messagebox
-user_database = {}
-
-def register_user():
-    username = username_entry.get()
-    password = password_entry.get()
-
-    if username and password:
-        if username in user_database:
-            messagebox.showerror("Ошибка регистрации", "Пользователь с таким именем уже существует.")
-        else:
-            user_database[username] = password
-            messagebox.showinfo("Регистрация успешна", "Регистрация прошла успешно. Пожалуйста, войдите с вашим именем и паролем.")
-
+def registr_user():     # Регистрируем пользователя
+    if not login.get() or not parol.get():
+        messagebox.showerror("Ошибка", "'Логин' и 'Пароль' должны быть заполнены.")
+    elif proverka_logina():
+        messagebox.showerror("Ошибка", "Учетная запись уже существует.")
     else:
-        messagebox.showwarning("Ошибка регистрации", "Пожалуйста, заполните оба поля.")
-def login_user():
-    username = username_entry.get()
-    password = password_entry.get()
-    if username and password:
-        if username in user_database and user_database[username] == password:
-            messagebox.showinfo("Вход выполнен успешно", "Вход выполнен успешно.")
-            register.destroy()
-        else:
-            messagebox.showerror("Ошибка входа", "Ошибка входа. Пожалуйста, проверьте ваше имя пользователя и пароль.")
+        with open("users.txt", "a") as file:
+            file.write(f"{login.get()}:{parol.get()}\n")
+        messagebox.showinfo("Успех","Регистрация успешно завершена.\nВойдите в аккаунт")
+def proverka_logina():      # Проверяем наличие логина в файле
+    if os.path.exists("users.txt"):
+        with open("users.txt", "r") as file:
+            lines = file.readlines()
+            login_vvod = login.get()
+            for line in lines:
+                if login_vvod in line:
+                    return True
+        return False
+def proverka_users():  # Проверяем наличие данных в файле о пользователе
+    if os.path.exists("users.txt"):
+        file = open("users.txt", "r+")
+        lines = file.readlines()
+        login_vvod = login.get()
+        parol_vvod = parol.get()
+        for line in lines:
+            parts = line.strip().split(':')
+            if len(parts) == 2:
+                sohranenii_login, sohranenii_password = parts
+                if login_vvod == sohranenii_login and parol_vvod == sohranenii_password:
+                    return True
+        return False
+def enter_users():  # Атвторизуем пользователя
+    if proverka_users():
+        messagebox.showinfo("Успех!", "Вы вошли в свой аккаунт")
+        root.destroy()
     else:
-        messagebox.showwarning("Ошибка входа", "Пожалуйста, заполните оба поля.")
-
-
-register = Tk()
-register.title('Регистрация и вход')
-register.geometry('300x250')
-register.resizable(width=False, height=False)
-
-reg_label = Label(register, text = 'Регистрация и вход', font = 'Arial 15')
-reg_label.pack()
-
-username_label = Label(register, text='Логин', font = 'Arial 13')
-username_label.pack()
-
-username_entry = Entry(register, font = 'Arial 12')
-username_entry.pack()
-
-password_label = Label(register, text='Пароль', font = 'Arial 13')
-password_label.pack()
-
-password_entry = Entry(register, font = 'Arial 12')
-password_entry.pack()
-
-register_btn=Button(register, text = 'Регистрация', command = register_user)
-register_btn.pack( padx=10, pady=20)
-
-login_btn=Button(register, text = 'Войти', command = login_user)
-login_btn.pack( padx=10, pady=20)
-
-register.mainloop()
+        messagebox.showerror("Ошибка", "Неверный логин или пароль.")
+root = Tk()  # Создаем окно
+root.title("Регистрация/вход")
+root.geometry("400x300")
+Label_login = Label(text="Логин")
+Label_login.pack(padx=6, pady=6)
+login = Entry(bd=2)
+login.pack(padx=6, pady=6)
+Label_parol = Label(text="Пароль")
+Label_parol.pack(padx=6, pady=6)
+parol = Entry(bd=2)
+parol.pack(padx=6, pady=6)
+vhod_btn1 = Button(text="Войти",command=enter_users)
+vhod_btn1.pack(padx=6, pady=6)
+registr_btn2 = Button(text="Зарегистрироваться",command=registr_user)
+registr_btn2.pack(padx=6, pady=6)
+root.mainloop()
