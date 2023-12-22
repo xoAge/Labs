@@ -22,7 +22,6 @@ try:        # Ввод точности t
         t = int(input("Введите число t, большее или равное 1 и меньшее 100:\n"))
     rank = np.random.randint(2, 10) # Генерация случайной матрицы
     matrix = np.random.uniform(-1,1, size = (rank, rank))
-    getcontext().prec = t + 100
     np.set_printoptions(linewidth=200)
     Rang = np.linalg.matrix_rank(matrix)  # Вычисление ранга матрицы x.
     print(f"Сгенерированная матрица:\n {matrix} \nРанг матрицы: {Rang}")
