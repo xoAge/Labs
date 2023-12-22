@@ -16,4 +16,4 @@ with open('titanic.csv', 'r') as file:
     upper_limit = age_mode + 15
     filter_fare_obsh = [stoimost for stoimost, age in zip(fare_obsh, ages) if lower_limit <= age <= upper_limit] # Фильтруем билеты в нужном возрастном интервале
     fare_konechnii = sum(filter_fare_obsh)
-    print(f"Мода = {age_mode}\nСуммарная стоимость билетов:",round(fare_konechnii, 5))
+    print("Суммарная стоимость билетов:",fare_konechnii)
