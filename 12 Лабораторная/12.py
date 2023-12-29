@@ -6,11 +6,11 @@ def result_sum(det_x, t):
     n,fact,current_sum = 1,1,0
     chislitel = det_x * (fact*n)
     while True:
-        fact = fact*n # Вычисляем факториал в числителе
-        summa = chislitel / fact # Вычисляем очередное слагаемое
+        fact = fact*n 
+        summa = chislitel / fact 
         current_sum += -abs(summa) if n == 1 else summa * (-1) ** n
         n += 1
-        if summa < t:  # Проверяем точность
+        if summa < t: 
             break
     return current_sum
 try:
