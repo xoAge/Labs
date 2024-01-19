@@ -9,13 +9,11 @@ a = np.array([[0, 2, -6, 5, 0],
               [5, 1, 2, 0, 7],
               [1, 4, 2, 3, 8]])
 min = np.min(a)
-max = np.max(a)
 for i in range(row):
     for j in range(row):
         if (a[i][j] <= min):
             min = a[i][j]
-        elif (a[i][j] > max):
-            max = a[i][j]
+       
 res = a.min(axis=1)
 print(res)
 
